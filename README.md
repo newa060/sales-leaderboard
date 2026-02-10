@@ -61,4 +61,3 @@ This project currently uses in-memory storage (an array) to store sales records 
 - `public/` — static assets (CSS/JS)
 
 
-
