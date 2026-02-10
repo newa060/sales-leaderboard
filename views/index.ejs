@@ -1,0 +1,121 @@
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <div class="container">
+        <div class="hero-section">
+            <h1>Welcome to Sales Leaderboard System</h1>
+            <p class="subtitle">Track and rank sales performance in real-time</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-value"><%= stats.totalAgents %></div>
+                <div class="stat-label">Total Agents</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-value">NPR <%= stats.totalSalesAmount.toLocaleString() %></div>
+                <div class="stat-label">Total Sales</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🤝</div>
+                <div class="stat-value"><%= stats.totalNumberOfDeals %></div>
+                <div class="stat-label">Total Deals</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-value"><%= stats.totalRecords %></div>
+                <div class="stat-label">Total Records</div>
+            </div>
+        </div>
+
+        <% if (message) { %>
+            <div class="alert alert-success">
+                ✓ <%= message %>
+            </div>
+        <% } %>
+        
+        <% if (error) { %>
+            <div class="alert alert-error">
+                ✗ <%= error %>
+            </div>
+        <% } %>
+
+        <div class="form-section">
+            <h2>Add New Sale</h2>
+            <p>Enter the sales information below to update the leaderboard</p>
+            
+            <form action="/sales" method="POST" class="sales-form" id="salesForm">
+                <div class="form-group">
+                    <label for="agentName">Agent Name *</label>
+                    <input 
+                        type="text" 
+                        id="agentName" 
+                        name="agentName" 
+                        placeholder="e.g., Ram Sharma" 
+                        required
+                        class="form-input"
+                    >
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="amountSold">Amount Sold (NPR) *</label>
+                        <input 
+                            type="number" 
+                            id="amountSold" 
+                            name="amountSold" 
+                            placeholder="50000" 
+                            min="0"
+                            step="0.01"
+                            required
+                            class="form-input"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numberOfSales">Number of Sales *</label>
+                        <input 
+                            type="number" 
+                            id="numberOfSales" 
+                            name="numberOfSales" 
+                            placeholder="5" 
+                            min="1"
+                            step="1"
+                            required
+                            class="form-input"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        Add Sale
+                    </button>
+                    <a href="/leaderboard" class="btn btn-secondary">
+                        View Leaderboard
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="quick-links">
+            <h3>Quick Links</h3>
+            <div class="links-grid">
+                <a href="/leaderboard" class="link-card">
+                    <span class="link-icon">🏆</span>
+                    <span class="link-text">View Leaderboard</span>
+                </a>
+                <a href="/api/leaderboard" target="_blank" class="link-card">
+                    <span class="link-icon">📡</span>
+                    <span class="link-text">API Endpoint</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/js/main.js"></script>
+
+<%- include('partials/footer') %>

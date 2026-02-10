@@ -1,0 +1,95 @@
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <div class="container">
+        <div class="leaderboard-header">
+            <h1>🏆 Sales Leaderboard</h1>
+            <p class="subtitle">Top performing sales agents ranked by total sales</p>
+        </div>
+
+        <div class="stats-summary">
+            <div class="summary-item">
+                <span class="summary-label">Total Agents:</span>
+                <span class="summary-value"><%= stats.totalAgents %></span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Total Sales:</span>
+                <span class="summary-value">NPR <%= stats.totalSalesAmount.toLocaleString() %></span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Total Deals:</span>
+                <span class="summary-value"><%= stats.totalNumberOfDeals %></span>
+            </div>
+        </div>
+
+        <div class="leaderboard-container">
+            <% if (leaderboard.length === 0) { %>
+                <div class="empty-state">
+                    <div class="empty-icon">📊</div>
+                    <h3>No Sales Data Yet</h3>
+                    <p>Start adding sales records to see the leaderboard</p>
+                    <a href="/" class="btn btn-primary">Add First Sale</a>
+                </div>
+            <% } else { %>
+                <div class="table-wrapper">
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th class="rank-col">Rank</th>
+                                <th class="name-col">Agent Name</th>
+                                <th class="sales-col">Total Sales</th>
+                                <th class="deals-col">Total Deals</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% leaderboard.forEach((agent, index) => { %>
+                                <tr class="<%= agent.rank <= 3 ? 'top-performer rank-' + agent.rank : '' %>">
+                                    <td class="rank-col">
+                                        <div class="rank-badge rank-<%= agent.rank %>">
+                                            <% if (agent.rank === 1) { %>
+                                                🥇
+                                            <% } else if (agent.rank === 2) { %>
+                                                🥈
+                                            <% } else if (agent.rank === 3) { %>
+                                                🥉
+                                            <% } else { %>
+                                                <%= agent.rank %>
+                                            <% } %>
+                                        </div>
+                                    </td>
+                                    <td class="name-col">
+                                        <div class="agent-name"><%= agent.agentName %></div>
+                                    </td>
+                                    <td class="sales-col">
+                                        <div class="sales-amount">NPR <%= agent.totalSales.toLocaleString() %></div>
+                                    </td>
+                                    <td class="deals-col">
+                                        <div class="deals-count"><%= agent.totalDeals %></div>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="leaderboard-actions">
+                    <a href="/" class="btn btn-primary">Add New Sale</a>
+                    <button onclick="window.location.reload()" class="btn btn-secondary">
+                        🔄 Refresh
+                    </button>
+                </div>
+            <% } %>
+        </div>
+
+        <div class="api-info-card">
+            <h3>🔌 API Access</h3>
+            <p>Access this leaderboard data programmatically via our REST API:</p>
+            <div class="api-endpoint">
+                <code>GET <%= `${req.protocol}://${req.get('host')}/api/leaderboard` %></code>
+            </div>
+            <a href="/api/leaderboard" target="_blank" class="btn btn-outline">View JSON Response</a>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
