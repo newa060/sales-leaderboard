@@ -46,14 +46,6 @@ There is a server-side controller under `src/controllers` that handles rendering
 
 This project currently uses in-memory storage (an array) to store sales records at runtime. Data is stored in `src/services/leaderboardService.js` and will be lost when the server restarts.
 
-To persist data, integrate a database (example options):
-
-- SQLite / PostgreSQL via `knex` or `pg`
-- MongoDB via `mongoose`
-- A hosted SQL/NoSQL service
-
-If you want, I can add an example integration (SQLite with `better-sqlite3` or MongoDB).
-
 ## Environment
 
 - This project optionally uses `.env` values (dotenv is a dependency). If you add environment variables, create a `.env` file in the project root.
@@ -68,16 +60,5 @@ If you want, I can add an example integration (SQLite with `better-sqlite3` or M
 - `views/` — EJS templates
 - `public/` — static assets (CSS/JS)
 
-## Contributing
 
-1. Fork the repo
-2. Create a feature branch
-3. Open a pull request
 
-## License
-
-MIT — see LICENSE if present.
-
----
-
-Created/updated by project assistant. Ask if you want a README tweak or database integration added.
