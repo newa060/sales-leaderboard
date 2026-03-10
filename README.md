@@ -59,5 +59,3 @@ This project currently uses in-memory storage (an array) to store sales records 
 - `src/services/leaderboardService.js` — in-memory data & aggregation logic
 - `views/` — EJS templates
 - `public/` — static assets (CSS/JS)
-
-
